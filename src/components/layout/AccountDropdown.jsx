@@ -17,7 +17,6 @@ function AccountDropdown() {
   const navigate = useNavigate();
 
   return (
-    // Toggle usage #2: expanded/collapsed state of the dropdown
     <Toggle
       render={(open, toggle) => (
         <DropdownBody open={open} toggle={toggle} logOut={logOut} navigate={navigate} />
@@ -26,8 +25,7 @@ function AccountDropdown() {
   );
 }
 
-// Everything Toggle doesn't own — outside-click handling, menu items,
-// logout — lives here in the caller, not inside Toggle itself.
+
 function DropdownBody({ open, toggle, logOut, navigate }) {
   const containerRef = useRef(null);
 
@@ -83,6 +81,4 @@ function DropdownBody({ open, toggle, logOut, navigate }) {
   );
 }
 
-// fallback: null — on a logged-out page this renders nothing instead
-// of redirecting, since Header (and therefore this) mounts on every page.
 export default withAuth(AccountDropdown, { fallback: null });
