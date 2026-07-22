@@ -1,17 +1,53 @@
+
+import { useDispatch } from "react-redux";
 import SectionHeader from "../../../components/layout/SectionHeader";
 import SectionNavArrows from "../../../components/SelectionNavArrows";
 import AppCard from "../../../components/AppCard";
 import Button from "../../../components/AppButton";
 import { exploreProducts } from "../../../data/mockData";
+import { addToCart } from "../../../store/cartSlice";
+import { addToWishlist } from "../../../store/wishlistSlice";
 
 export default function ExploreProductsSection() {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    dispatch(
+      addToCart({
+        id: product.id,
+        title: product.title,
+        image: product.image,
+        price: product.price,
+      })
+    );
+  };
+
+  const handleAddToWishlist = (product) => {
+    dispatch(
+      addToWishlist({
+        id: product.id,
+        title: product.title,
+        image: product.image,
+        price: product.price,
+        oldPrice: product.oldPrice,
+        discount: product.discount,
+      })
+    );
+  };
+
   return (
     <section className="container-app section">
       <SectionHeader eyebrow="Our Products" title="Explore Our Products" action={<SectionNavArrows />} />
 
       <div className="product-grid">
         {exploreProducts.map((product) => (
-          <AppCard key={product.id} variant="explore" {...product} />
+          <AppCard
+            key={product.id}
+            variant="explore"
+            {...product}
+            onAddToCart={() => handleAddToCart(product)}
+            onAddToWishlist={() => handleAddToWishlist(product)}
+          />
         ))}
       </div>
 
@@ -21,4 +57,3 @@ export default function ExploreProductsSection() {
     </section>
   );
 }
-

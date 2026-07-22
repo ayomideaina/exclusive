@@ -4,23 +4,18 @@
   --color-primary: #DB4444;
   --color-primary-dark: #C73A3A;
   --color-secondary: #00FF66;
-
   --color-white: #FFFFFF;
   --color-black: #000000;
-
   --color-text-primary: #000000;
   --color-text-secondary: #7D8184;
   --color-text-muted: #999999;
   --color-text-light: #FAFAFA;
-
   --color-background: #FFFFFF;
   --color-background-light: #F5F5F5;
   --color-background-muted: #FAFAFA;
   --color-background-dark: #000000;
-
   --color-border: #E5E5E5;
   --color-border-light: #F0F0F0;
-
   --color-success: #00FF66;
   --color-rating: #FFAD33;
 
@@ -121,10 +116,10 @@
     .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .category-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
-
+/* 
   @media (min-width: 768px) {
     .section { padding-block: 5rem; }
-  }
+  } */
 
   @media (min-width: 1024px) {
     .product-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }

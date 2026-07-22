@@ -1,8 +1,9 @@
 import { Search, Heart, ShoppingCart, Menu, X } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-// import { useSelector } from "react-redux";
-// import AccountDropdown from "../AccountDropdown/AccountDropdown";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import useAuth from "../../hooks/useAuth";
+import AccountDropdown from "./AccountDropdown";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -14,8 +15,18 @@ export default function Header() {
   const [query, setQuery] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  // const cartCount = useSelector((state) => state.cart.items.length);
-  // const wishlistCount = useSelector((state) => state.wishlist.items.length);
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const cartCount = useSelector((state) => state.cart.items.length);
+  const wishlistCount = useSelector((state) => state.wishlist.items.length);
+
+  const requireAuth = (e) => {
+    if (!user) {
+      e.preventDefault();
+      navigate("/login");
+    }
+  };
 
   return (
     <header className="border-b border-border-light relative">
@@ -36,12 +47,11 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          <Link
-            to="/signup"
-            className="text-sm text-text-primary hover:text-primary"
-          >
-            Sign Up
-          </Link>
+          {!user && (
+            <Link to="/signup" className="text-sm text-text-primary hover:text-primary">
+              Sign Up
+            </Link>
+          )}
         </nav>
 
         <div className="flex items-center gap-4 sm:gap-6">
@@ -64,13 +74,25 @@ export default function Header() {
             <Search className="w-5 h-5" />
           </button>
 
-          <Link to="/wishlist" aria-label="Wishlist" className="relative">
+          <Link to="/wishlist" aria-label="Wishlist" className="relative" onClick={requireAuth}>
             <Heart className="w-5 h-5 text-text-primary hover:text-primary" />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+                {wishlistCount}
+              </span>
+            )}
           </Link>
 
-          <Link to="/cart" aria-label="Cart" className="relative">
+          <Link to="/cart" aria-label="Cart" className="relative" onClick={requireAuth}>
             <ShoppingCart className="w-5 h-5 text-text-primary hover:text-primary" />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
           </Link>
+
+          <AccountDropdown />
 
           <button
             onClick={() => setIsMenuOpen((prev) => !prev)}
@@ -78,15 +100,10 @@ export default function Header() {
             aria-expanded={isMenuOpen}
             className="md:hidden text-text-primary"
           >
-            {isMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
-
 
       {isSearchOpen && (
         <div className="sm:hidden px-4 pb-4">
@@ -115,13 +132,15 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          <Link
-            to="/signup"
-            onClick={() => setIsMenuOpen(false)}
-            className="text-sm text-text-primary hover:text-primary"
-          >
-            Sign Up
-          </Link>
+          {!user && (
+            <Link
+              to="/signup"
+              onClick={() => setIsMenuOpen(false)}
+              className="text-sm text-text-primary hover:text-primary"
+            >
+              Sign Up
+            </Link>
+          )}
         </nav>
       )}
     </header>
