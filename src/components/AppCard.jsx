@@ -49,7 +49,7 @@ export default function AppCard({
   const detailHref = id ? `/product/${id}` : undefined;
 
   return (
-    <div className="group relative flex flex-col gap-3 rounded p-4 bg-background-light">
+    <div className="group relative flex flex-col gap-3 rounded p-4 min-w-0">
       <div className="relative bg-white rounded overflow-hidden">
         {variant === "flashSale" && discount && (
           <span className="absolute top-2 left-2 z-10 bg-primary text-white text-xs px-2 py-1 rounded">

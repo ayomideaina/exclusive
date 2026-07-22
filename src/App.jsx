@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/WishList";
+import Contact from "./pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -17,8 +18,9 @@ const router = createBrowserRouter([
       { path: "/signup", element: <SignUp /> },
       { path: "/login", element: <Login /> },
       { path: "/product/:id", element: <ProductDetail /> },
-       { path: "/cart", element: <Cart /> },
+      { path: "/cart", element: <Cart /> },
       { path: "/wishlist", element: <Wishlist /> },
+      { path: "/contact", element: <Contact /> },
       { path: "*", element: <NotFound /> },
     ],
   },
