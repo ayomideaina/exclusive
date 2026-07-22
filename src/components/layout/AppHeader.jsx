@@ -30,12 +30,10 @@ export default function Header() {
 
   return (
     <header className="border-b border-border-light relative">
-      <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-5">
-        <div className="flex items-center">
+      <div className="max-w-7xl flex items-center justify-between px-12 py-5">
           <Link to="/" className="text-xl sm:text-2xl font-bold text-text-primary">
             Exclusive
           </Link>
-        </div>
 
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (

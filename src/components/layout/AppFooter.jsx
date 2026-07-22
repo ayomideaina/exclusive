@@ -7,8 +7,8 @@ export default function Footer() {
   const [email, setEmail] = useState("");
 
   return (
-    <footer className="bg-black text-white  container-app">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-10 px-4 py-16">
+    <footer className="bg-black text-white ">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-10 px-12 py-16">
         <div className="flex flex-col gap-4">
           <h3 className="text-lg font-semibold">Exclusive</h3>
           <p className="text-sm">Subscribe</p>
